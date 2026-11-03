@@ -9,344 +9,70 @@
     content="Mentions légales du portfolio professionnel Double R Digital."
   >
   <meta name="robots" content="index,follow">
-  <meta name="theme-color" content="#07101d">
+  <meta name="theme-color" content="#1E6B52">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 
   <title>Mentions légales | Double R Digital</title>
 
   <style>
     :root {
-      --background: #07101d;
-      --surface: #0c1829;
-      --surface-soft: #101f34;
-      --text: #f7f9fc;
-      --muted: #a4b2c4;
-      --primary: #6e8cff;
-      --cyan: #43d4e8;
-      --line: rgba(255, 255, 255, 0.11);
-      --warning: #ffcf70;
-      --warning-bg: rgba(255, 207, 112, 0.09);
-      --container: 980px;
+      --bg: #ffffff; --soft: #f3f6f4; --mint: #e3f1ea; --ink: #15201b; --muted: #4f5e57;
+      --accent: #1e6b52; --line: #dfe7e3; --sun: #ffc94d; --container: 900px;
     }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { min-width: 320px; margin: 0; color: var(--ink); background: var(--bg);
+      font-family: "DM Sans", system-ui, sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); }
+    a:hover { color: var(--ink); }
+    :focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 6px; }
+    .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: clamp(16px, 4vw, 32px); }
+    h1, h2, h3 { font-family: "Bricolage Grotesque", system-ui, sans-serif; margin-top: 0; line-height: 1.15; letter-spacing: -0.025em; }
 
-    * {
-      box-sizing: border-box;
-    }
+    .legal-header { border-bottom: 1px solid var(--line); }
+    .legal-nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; }
+    .brand:hover { color: var(--ink); }
+    .brand img { width: 40px; height: 32px; object-fit: contain; }
+    .brand-light { font-weight: 500; }
+    .back-link { min-height: 44px; padding: 0 18px; display: inline-flex; align-items: center; border-radius: 999px;
+      background: var(--soft); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 700; }
+    .back-link:hover { background: var(--mint); color: var(--ink); }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    main { padding: clamp(48px, 7vw, 80px) 0 clamp(56px, 8vw, 96px); }
+    .legal-intro { margin-bottom: 36px; }
+    .eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 15px; font-weight: 700; }
+    h1 { margin-bottom: 16px; font-size: clamp(40px, 7vw, 64px); font-weight: 800; }
+    .legal-intro > p:last-child { max-width: 720px; margin: 0; color: var(--muted); font-size: 17px; }
 
-    body {
-      min-width: 320px;
-      margin: 0;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 88% 10%, rgba(92, 124, 250, 0.17), transparent 28%),
-        radial-gradient(circle at 8% 90%, rgba(67, 212, 232, 0.10), transparent 25%),
-        var(--background);
-      font-family:
-        Inter, Manrope, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      line-height: 1.7;
-    }
+    .legal-card { margin-bottom: 16px; padding: clamp(22px, 4vw, 36px); border-radius: 24px; background: var(--soft); }
+    .legal-card h2 { margin-bottom: 16px; font-size: 24px; font-weight: 800; }
+    .legal-card h3 { margin: 24px 0 8px; font-size: 17px; font-weight: 700; }
+    .legal-card p, .legal-card li, .legal-card dd { color: var(--muted); font-size: 15px; }
+    .legal-card p:last-child { margin-bottom: 0; }
 
-    a {
-      color: inherit;
-    }
+    .identity-grid { display: grid; grid-template-columns: minmax(170px, 0.38fr) minmax(0, 0.62fr); margin: 0;
+      border-radius: 16px; overflow: hidden; background: #fff; }
+    .identity-grid dt, .identity-grid dd { min-width: 0; margin: 0; padding: 13px 16px; border-bottom: 1px solid var(--line); }
+    .identity-grid dt { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .identity-grid dd { overflow-wrap: anywhere; }
+    .identity-grid dt:nth-last-of-type(1), .identity-grid dd:last-child { border-bottom: 0; }
 
-    .container {
-      width: min(calc(100% - 32px), var(--container));
-      margin-inline: auto;
-    }
+    .legal-link { font-weight: 700; text-underline-offset: 3px; }
 
-    .legal-header {
-      border-bottom: 1px solid var(--line);
-      background: rgba(7, 16, 29, 0.86);
-      backdrop-filter: blur(18px);
-    }
-
-    .legal-nav {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 13px;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .brand-icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(110, 140, 255, 0.52);
-      border-radius: 14px;
-      color: var(--cyan);
-      background: linear-gradient(145deg, rgba(92, 124, 250, 0.18), rgba(67, 212, 232, 0.08));
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-    }
-
-    .brand-copy {
-      display: grid;
-      line-height: 1;
-    }
-
-    .brand-copy strong {
-      font-size: 15px;
-      letter-spacing: 0.04em;
-    }
-
-    .brand-copy small {
-      margin-top: 7px;
-      color: var(--primary);
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 0.28em;
-    }
-
-    .back-link {
-      min-height: 42px;
-      padding: 0 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: #d9e2ed;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800;
-      transition: 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: #ffffff;
-      border-color: rgba(110, 140, 255, 0.55);
-      transform: translateY(-1px);
-    }
-
-    main {
-      padding: 78px 0 94px;
-    }
-
-    .legal-intro {
-      margin-bottom: 30px;
-    }
-
-    .eyebrow {
-      margin: 0 0 16px;
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      color: var(--primary);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 1px;
-      background: currentColor;
-    }
-
-    h1,
-    h2,
-    h3 {
-      margin-top: 0;
-      line-height: 1.2;
-      letter-spacing: -0.025em;
-    }
-
-    h1 {
-      max-width: 700px;
-      margin-bottom: 18px;
-      font-size: clamp(42px, 7vw, 68px);
-    }
-
-    .legal-intro > p:last-child {
-      max-width: 760px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    .completion-warning {
-      margin-bottom: 24px;
-      padding: 20px;
-      border: 1px solid rgba(255, 207, 112, 0.30);
-      border-radius: 18px;
-      color: #f9e6b8;
-      background: var(--warning-bg);
-    }
-
-    .completion-warning strong {
-      display: block;
-      margin-bottom: 5px;
-      color: var(--warning);
-    }
-
-    .legal-card {
-      margin-bottom: 18px;
-      padding: clamp(24px, 5vw, 38px);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
-        var(--surface);
-      box-shadow: 0 22px 65px rgba(0, 0, 0, 0.18);
-    }
-
-    .legal-card h2 {
-      margin-bottom: 18px;
-      font-size: 25px;
-    }
-
-    .legal-card h3 {
-      margin: 25px 0 8px;
-      color: #dce5f2;
-      font-size: 16px;
-    }
-
-    .legal-card p,
-    .legal-card li,
-    .legal-card dd {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .legal-card p:last-child {
-      margin-bottom: 0;
-    }
-
-    .identity-grid {
-      display: grid;
-      grid-template-columns: minmax(180px, 0.38fr) minmax(0, 0.62fr);
-      gap: 0;
-      margin: 0;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      overflow: hidden;
-    }
-
-    .identity-grid dt,
-    .identity-grid dd {
-      min-width: 0;
-      margin: 0;
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .identity-grid dt {
-      color: #dce5f2;
-      background: rgba(255, 255, 255, 0.028);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .identity-grid dd {
-      overflow-wrap: anywhere;
-    }
-
-    .identity-grid dt:nth-last-of-type(1),
-    .identity-grid dd:last-child {
-      border-bottom: 0;
-    }
-
-    .todo {
-      display: inline;
-      padding: 2px 7px;
-      border: 1px dashed rgba(255, 207, 112, 0.55);
-      border-radius: 7px;
-      color: var(--warning);
-      background: rgba(255, 207, 112, 0.07);
-      font-weight: 800;
-    }
-
-    .legal-list {
-      margin: 12px 0 0;
-      padding-left: 21px;
-    }
-
-    .legal-list li + li {
-      margin-top: 8px;
-    }
-
-    .legal-link {
-      color: #adc0ff;
-      font-weight: 800;
-      text-decoration: underline;
-      text-decoration-color: rgba(173, 192, 255, 0.38);
-      text-underline-offset: 3px;
-    }
-
-    .legal-link:hover {
-      color: #ffffff;
-    }
-
-    .legal-footer {
-      padding: 28px 0;
-      border-top: 1px solid var(--line);
-      color: #78879a;
-      font-size: 12px;
-    }
-
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-    }
+    .legal-footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 
     @media (max-width: 680px) {
-      .legal-nav {
-        min-height: 70px;
-      }
-
-      .brand-copy {
-        display: none;
-      }
-
-      main {
-        padding: 56px 0 72px;
-      }
-
-      .identity-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .identity-grid dt,
-      .identity-grid dd {
-        border-bottom: 1px solid var(--line);
-      }
-
-      .identity-grid dt {
-        padding-bottom: 6px;
-      }
-
-      .identity-grid dd {
-        padding-top: 6px;
-      }
-
-      .identity-grid dd:last-child {
-        border-bottom: 0;
-      }
-
-      .footer-row {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      .back-link span { display: none; }
+      .identity-grid { grid-template-columns: 1fr; }
+      .identity-grid dt { padding-bottom: 2px; border-bottom: 0; }
+      .identity-grid dd { padding-top: 2px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
@@ -355,15 +81,11 @@
   <header class="legal-header">
     <div class="container legal-nav">
       <a class="brand" href="index.html" aria-label="Retour au portfolio Double R Digital">
-        <span class="brand-icon" aria-hidden="true">DR</span>
-
-        <span class="brand-copy">
-          <strong>DOUBLE R</strong>
-          <small>DIGITAL</small>
-        </span>
+        <img src="assets/logo-double-r.png" alt="" width="40" height="32">
+        <span>Double R <span class="brand-light">Digital</span></span>
       </a>
 
-      <a class="back-link" href="index.html">← Retour au portfolio</a>
+      <a class="back-link" href="index.html" aria-label="Retour au portfolio">← <span>Retour au portfolio</span></a>
     </div>
   </header>
 
@@ -529,7 +251,7 @@
         <p>
           Les marques, noms commerciaux, logos et contenus appartenant à des tiers
           restent la propriété de leurs titulaires respectifs. La présentation du
-          projet Fich’Antier sur ce portfolio n’emporte aucune cession de droits.
+          projets Fich’Antier et Pro Fight Team sur ce portfolio n’emporte aucune cession de droits.
         </p>
       </section>
 
@@ -537,9 +259,16 @@
         <h2>5. Données personnelles et confidentialité</h2>
 
         <p>
-          Dans sa version actuelle, ce portfolio est un site vitrine statique.
-          Il ne comporte pas de compte utilisateur, de newsletter, de paiement en
-          ligne ni de formulaire de contact traité directement par le site.
+          Ce portfolio est un site vitrine statique. Il ne comporte pas de compte utilisateur,
+          de newsletter ni de paiement en ligne.
+        </p>
+
+        <p>
+          Le formulaire de contact permet de m’envoyer votre prénom, votre adresse e-mail,
+          le type de projet et votre message. Ces données sont transmises par l’intermédiaire
+          du service FormSubmit (formsubmit.co), puis reçues par e-mail. Elles servent uniquement
+          à répondre à votre demande et ne sont ni revendues ni utilisées à des fins publicitaires.
+          Elles sont conservées le temps nécessaire au traitement de votre demande et à la relation commerciale éventuelle.
         </p>
 
         <p>
@@ -552,7 +281,7 @@
 
         <p>
           Certains liens peuvent conduire vers des services tiers, notamment
-          GitHub ou Fich’Antier. Ces services appliquent leurs propres politiques
+          GitHub, FormSubmit, Fich’Antier ou Pro Fight Team. Ces services appliquent leurs propres politiques
           de confidentialité.
         </p>
 
@@ -613,7 +342,7 @@
 
         <p>
           Dernière mise à jour de cette page :
-          <strong>4 août 2026</strong>.
+          <strong>3 novembre 2026</strong>.
         </p>
       </section>
     </div>

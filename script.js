@@ -1,58 +1,106 @@
-const header=document.querySelector(".site-header");
-const menuButton=document.querySelector(".menu-toggle");
-const navigation=document.querySelector(".main-nav");
-const navLinks=document.querySelectorAll(".main-nav a");
-const yearElement=document.querySelector("#current-year");
-const copyButton=document.querySelector("#copy-contact");
-const copyFeedback=document.querySelector("#copy-feedback");
+// Double R Digital — interactions du portfolio
+document.documentElement.classList.add("js");
 
-function updateHeader(){
-  header?.classList.toggle("scrolled",window.scrollY>18);
+const header = document.querySelector(".site-header");
+const menuButton = document.querySelector(".menu-toggle");
+const menu = document.querySelector("#menu");
+const stickyCta = document.querySelector("#sticky-cta");
+const hero = document.querySelector(".hero");
+
+/* ---------- En-tête au scroll ---------- */
+function onScroll() {
+  header?.classList.toggle("scrolled", window.scrollY > 10);
 }
-function closeMenu(){
-  navigation?.classList.remove("open");
-  menuButton?.setAttribute("aria-expanded","false");
-  menuButton?.setAttribute("aria-label","Ouvrir le menu");
-  document.body.classList.remove("menu-open");
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+/* ---------- Menu mobile ---------- */
+function setMenu(open) {
+  if (!menuButton || !menu) return;
+  menuButton.setAttribute("aria-expanded", String(open));
+  menuButton.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+  menu.classList.toggle("open", open);
+  document.body.classList.toggle("menu-open", open);
 }
-menuButton?.addEventListener("click",()=>{
-  const isOpen=menuButton.getAttribute("aria-expanded")==="true";
-  menuButton.setAttribute("aria-expanded",String(!isOpen));
-  menuButton.setAttribute("aria-label",isOpen?"Ouvrir le menu":"Fermer le menu");
-  navigation?.classList.toggle("open",!isOpen);
-  document.body.classList.toggle("menu-open",!isOpen);
+menuButton?.addEventListener("click", () => {
+  setMenu(menuButton.getAttribute("aria-expanded") !== "true");
 });
-navLinks.forEach(link=>link.addEventListener("click",closeMenu));
-window.addEventListener("scroll",updateHeader,{passive:true});
-window.addEventListener("resize",()=>{if(window.innerWidth>820)closeMenu()});
-updateHeader();
-
-if(yearElement) yearElement.textContent=new Date().getFullYear();
-
-const revealObserver=new IntersectionObserver((entries,observer)=>{
-  entries.forEach(entry=>{
-    if(!entry.isIntersecting)return;
-    entry.target.classList.add("is-visible");
-    observer.unobserve(entry.target);
-  });
-},{threshold:.12});
-document.querySelectorAll(".reveal").forEach(element=>revealObserver.observe(element));
-
-copyButton?.addEventListener("click",async()=>{
-  const contact=copyButton.dataset.contact;
-  if(!contact||contact.startsWith("À remplacer")){
-    copyFeedback.textContent="Ajoute ton adresse e-mail dans l’attribut data-contact du bouton.";
-    return;
+menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setMenu(false)));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && menu?.classList.contains("open")) {
+    setMenu(false);
+    menuButton?.focus();
   }
-  try{
-    await navigator.clipboard.writeText(contact);
-    copyFeedback.textContent="Adresse e-mail copiée.";
-    copyButton.textContent="E-mail copié ✓";
-    setTimeout(()=>{
-      copyButton.textContent="Copier mon e-mail";
-      copyFeedback.textContent="";
-    },2200);
-  }catch(error){
-    copyFeedback.textContent=`Adresse : ${contact}`;
+});
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 860) setMenu(false);
+});
+
+/* ---------- Barre « Me contacter » sur mobile ---------- */
+if (stickyCta && hero && "IntersectionObserver" in window) {
+  const contact = document.querySelector("#contact");
+  let heroVisible = true;
+  let contactVisible = false;
+  const update = () => {
+    const show = !heroVisible && !contactVisible;
+    stickyCta.classList.toggle("visible", show);
+    stickyCta.setAttribute("aria-hidden", String(!show));
+    stickyCta.querySelector("a")?.setAttribute("tabindex", show ? "0" : "-1");
+  };
+  new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; update(); }).observe(hero);
+  if (contact) {
+    new IntersectionObserver(([entry]) => { contactVisible = entry.isIntersecting; update(); }, { threshold: 0.15 }).observe(contact);
+  }
+}
+
+/* ---------- Apparition des blocs au scroll ---------- */
+const revealItems = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+  revealItems.forEach((item) => revealObserver.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+}
+
+/* ---------- Année du pied de page ---------- */
+const year = document.querySelector("#current-year");
+if (year) year.textContent = new Date().getFullYear();
+
+/* ---------- Formulaire de contact (FormSubmit, envoi sans recharger la page) ---------- */
+const form = document.querySelector("#contact-form");
+const status = document.querySelector("#form-status");
+
+form?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!status) return form.submit();
+
+  const button = form.querySelector('button[type="submit"]');
+  const ajaxUrl = form.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+
+  status.className = "form-status";
+  status.textContent = "Envoi en cours…";
+  if (button) button.disabled = true;
+
+  try {
+    const response = await fetch(ajaxUrl, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(form),
+    });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    form.reset();
+    status.classList.add("ok");
+    status.textContent = "Merci ! Votre message est bien parti, je vous réponds très vite.";
+  } catch (error) {
+    status.classList.add("error");
+    status.innerHTML = 'Oups, l’envoi n’a pas fonctionné. Écrivez-moi directement à <a href="mailto:rickyrichard2205@gmail.com">rickyrichard2205@gmail.com</a>.';
+  } finally {
+    if (button) button.disabled = false;
   }
 });
